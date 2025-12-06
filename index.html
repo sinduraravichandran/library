@@ -10,7 +10,23 @@
         <div id="books">
 
         </div>
-        <button type="button">New Book</button>
+        <button id="new-book" type="button">New Book</button>
+        <dialog id="dialog">
+            <form id="form" method="dialog">
+                <label for="author">Author</label>
+                <input id="author" name="author" type="text">
+                <label for="title">Title</label>
+                <input id="title" name="title" type="text">
+                <label for="pages">Number of Pages</label>
+                <input id="pages" name="pages" type="text">
+                <label for="read">Did you read this book?</label>
+                <select id="read" name="read">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <button id="add-book" formmethod="dialog">Add Book</button>
+            </form>
+        </dialog>
         <script src="script.js"></script>
     </body>
 </html>

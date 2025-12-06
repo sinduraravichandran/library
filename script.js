@@ -1,4 +1,8 @@
 const myLibrary = [];
+const newBookButton = document.getElementById("new-book");
+const addBookButton = document.getElementById("add-book");
+const dialog = document.getElementById("dialog");
+const formElement = document.querySelector("#form");
 
 function Book(title, author, pages, read) {
     this.id = crypto.randomUUID();
@@ -44,5 +48,24 @@ function addBooksToPage() {
 
 }
 
+function addBookToLibrary() {
+
+
+}
+
 addBookToLibrary("wedding people","sindura",300,false);
 addBooksToPage();
+
+//open dialog when click 'New Book'
+newBookButton.addEventListener('click', () => {
+    dialog.showModal();
+
+})
+
+//user clicks add book
+addBookButton.addEventListener('click', () => {
+    const formData = new FormData(formElement);
+    console.log(formData);
+})
+
+
