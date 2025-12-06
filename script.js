@@ -2,7 +2,9 @@ const myLibrary = [];
 const newBookButton = document.getElementById("new-book");
 const addBookButton = document.getElementById("add-book");
 const dialog = document.getElementById("dialog");
-const form = document.getElementById("form")
+const form = document.getElementById("form");
+const cardContainer = document.getElementById("books");
+
 
 
 function Book(title, author, pages, read) {
@@ -23,11 +25,9 @@ function Book(title, author, pages, read) {
     }
 }
 
-
+//creates all the book elements and adds them to the page
 function addBooksToPage() {
-
-    //get the div that holds all the books
-    const cardContainer = document.getElementById("books");
+    //clear out books
     cardContainer.innerHTML = "";
     
     for (item of myLibrary) {
@@ -41,6 +41,14 @@ function addBooksToPage() {
         cardText.classList.add("card-text");
         cardText.innerText = item.info();
         card.appendChild(cardText);
+
+        //add ID to card and add button
+        card.dataset.id = item.id;
+        const button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.setAttribute("id", "delete-button");
+        button.innerText = "Delete";
+        card.appendChild(button);
     }
 
 }
@@ -63,5 +71,17 @@ addBookButton.addEventListener('click', () => {
     myLibrary.push(bookInput);
     addBooksToPage();
     form.reset()
+})
+
+//user clicks 'Delete' on a book
+cardContainer.addEventListener("click", (e) => {
+    myLibrary.forEach((book) => {
+        if (e.target.closest(".card").dataset.id === book.id) {
+            const bookIndex = myLibrary.indexOf(book.id);
+            myLibrary.splice(bookIndex,1);
+            addBooksToPage()
+        } 
+    })
+
 })
 
