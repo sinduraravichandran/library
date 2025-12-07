@@ -1,7 +1,35 @@
 
-.card {
-    width: 200px;
-    height: 200px;
-    background-color: lightcyan;
+* {
+    font-family: 'Times New Roman', Times, serif;
 }
 
+#books {
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.card {
+    width: 200px;
+    height: 150px;
+    background-color: #f7e7ce;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid lightgray;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+dialog {
+    border: 1px solid lightgray;
+}
