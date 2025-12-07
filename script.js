@@ -25,6 +25,10 @@ function Book(title, author, pages, read) {
     }
 }
 
+Book.prototype.readStatus = function() {
+    this.read = !this.read;
+}
+
 //creates all the book elements and adds them to the page
 function addBooksToPage() {
     //clear out books
@@ -44,13 +48,19 @@ function addBooksToPage() {
 
         //add ID to card and add button
         card.dataset.id = item.id;
-        const button = document.createElement("button");
-        button.setAttribute("type", "button");
-        button.setAttribute("id", "delete-button");
-        button.innerText = "Delete";
-        card.appendChild(button);
-    }
+        const deleteButton = document.createElement("button");
+        deleteButton.setAttribute("type", "button");
+        deleteButton.classList.add("delete-button"); 
+        deleteButton.innerText = "Delete";
+        card.appendChild(deleteButton);
 
+        //add read button
+        const readButton = document.createElement("button");
+        readButton.setAttribute("type", "button");
+        readButton.classList.add("read-button");
+        readButton.innerHTML = "Read";
+        card.appendChild(readButton);
+    }
 }
 
 
@@ -75,13 +85,25 @@ addBookButton.addEventListener('click', () => {
 
 //user clicks 'Delete' on a book
 cardContainer.addEventListener("click", (e) => {
-    myLibrary.forEach((book) => {
-        if (e.target.closest(".card").dataset.id === book.id) {
-            const bookIndex = myLibrary.indexOf(book.id);
-            myLibrary.splice(bookIndex,1);
-            addBooksToPage()
-        } 
-    })
+     if (!e.target.classList.contains("delete-button")) {
+        return;
+    }
 
+    //get index of book from array that matches the book that was clicked
+    const bookIndex = myLibrary.findIndex((book) => book.id === e.target.closest(".card").dataset.id);
+    myLibrary.splice(bookIndex,1);
+    addBooksToPage();
+    
 })
 
+//user clicks 'Read' on a book 
+cardContainer.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("read-button")) {
+        return;
+    }
+
+    //get index of book from array that matches the book that was clicked
+    const bookIndex = myLibrary.findIndex((book) => book.id === e.target.closest(".card").dataset.id);
+    myLibrary[bookIndex].readStatus();
+    addBooksToPage();
+})
