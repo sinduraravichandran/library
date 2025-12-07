@@ -43,7 +43,7 @@ function addBooksToPage() {
         //create the text on the book
         const cardText = document.createElement("p");
         cardText.classList.add("card-text");
-        cardText.innerText = item.info();
+        cardText.innerText = `Title: ${item.title}\nAuthor: ${item.author}\nPages: ${item.pages}\nRead: ${item.read ? "Read" : "Not Read Yet"}`;
         card.appendChild(cardText);
 
         //add ID to card and add button
@@ -58,7 +58,7 @@ function addBooksToPage() {
         const readButton = document.createElement("button");
         readButton.setAttribute("type", "button");
         readButton.classList.add("read-button");
-        readButton.innerHTML = "Read";
+        item.read ? readButton.innerText = "Mark as Unread" : readButton.innerText = "Mark as Read"
         card.appendChild(readButton);
     }
 }
